@@ -13,19 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cars', function (Blueprint $table) {
+        Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_mobil');
+            $table->string('title');
             $table->string('slug');
-            $table->foreignId('type_id');
-            $table->decimal('price', 15, 2);
-            $table->integer('pintu');
-            $table->integer('penumpang');
+            $table->text('excerpt');
             $table->text('description');
             $table->text('image');
-            $table->integer('status')->nullable();
+            $table->foreignId('type_id');
+            $table->integer('status');
             $table->timestamps();
         });
+        DB::statement('ALTER TABLE blogs ADD FULLTEXT search(title,slug,excerpt,description)');
     }
 
     /**
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cars');
+        Schema::dropIfExists('blogs');
     }
 };

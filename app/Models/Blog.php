@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Car extends Model
+class Blog extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
@@ -30,11 +30,10 @@ class Car extends Model
 		$statuses = $this->statuses();
 
 		return isset($this->status) ? $statuses[$this->status] : null;
-	}
+    }
 
-	public function type()
+    public function type()
 	{
 		return $this->belongsTo(Type::class);
 	}
 }
-
