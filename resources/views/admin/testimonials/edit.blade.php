@@ -10,35 +10,36 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Tambah Data</h3>
-                <a href="{{ route('admin.teams.index')}}" class="btn btn-success shadow-sm float-right"> <i class="fa fa-arrow-left"></i> Kembali</a>
+                <h3 class="card-title">Edit Data</h3>
+                <a href="{{ route('admin.testimonials.index')}}" class="btn btn-success shadow-sm float-right"> <i class="fa fa-arrow-left"></i> Kembali</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form method="post" action="{{ route('admin.teams.store') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admin.testimonials.update', $testimonial) }}" enctype="multipart/form-data">
                     @csrf
+                    @method('put')
                     <div class="form-group row border-bottom pb-4">
-                        <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                        <label for="name" class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="nama" value="{{ old('nama') }}" id="nama">
+                          <input type="text" class="form-control" name="name" value="{{ old('name', $testimonial->name) }}" id="name">
                         </div>
                     </div>
                     <div class="form-group row border-bottom pb-4">
-                        <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
+                        <label for="profile" class="col-sm-2 col-form-label">Profile</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="jabatan" value="{{ old('jabatan') }}" id="jabatan">
+                          <input type="file" class="form-control" name="profile" value="{{ old('profile') }}" id="profile">
                         </div>
                     </div>
                     <div class="form-group row border-bottom pb-4">
-                        <label for="photo" class="col-sm-2 col-form-label">Photo</label>
+                        <label for="pekerjaan" class="col-sm-2 col-form-label">Pekerjaan</label>
                         <div class="col-sm-10">
-                          <input type="file" class="form-control" name="photo" value="{{ old('photo') }}" id="photo">
+                          <input type="text" class="form-control" name="pekerjaan" value="{{ old('pekerjaan', $testimonial->pekerjaan) }}" id="pekerjaan">
                         </div>
                     </div>
                     <div class="form-group row border-bottom pb-4">
-                        <label for="bio" class="col-sm-2 col-form-label">Bio</label>
+                        <label for="pesan" class="col-sm-2 col-form-label">Pesan</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control" name="bio" id="bio" cols="30" rows="6">{{ old('bio') }}</textarea>
+                          <textarea class="form-control" name="pesan" id="pesan" cols="30" rows="6">{{ old('pesan', $testimonial->pesan) }}</textarea>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success">Save</button>

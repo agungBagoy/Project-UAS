@@ -11,7 +11,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Semua Data</h3>
-                <a href="{{ route('admin.settings.create')}}" class="btn btn-success shadow-sm float-right"> <i class="fa fa-plus"></i> Tambah </a>
+                <a href="{{ route('admin.teams.create')}}" class="btn btn-success shadow-sm float-right"> <i class="fa fa-plus"></i> Tambah </a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -20,27 +20,35 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Key</th>
-                        <th>Value</th>
+                        <th>Nama</th>
+                        <th>Photo</th>
+                        <th>Jabatan</th>
+                        <th>Bio</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @forelse($settings as $setting)
+                        @forelse($teams as $team)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $setting->key }}</td>
-                                <td>{{ $setting->value }}</td>
+                                <td>{{ $team->nama }}</td>
+                                <td>
+                                  <a href="{{ Storage::url($team->photo) }}" target="_blank">
+                                    <img src="{{ Storage::url($team->photo) }}" width="80" alt="">
+                                  </a>
+                                </td>
+                                <td>{{ $team->jabatan }}</td>
+                                <td>{{ $team->bio }}</td>
                                 <td>
                                 <div class="btn-group btn-group-sm">
-                                    <a href="{{ route('admin.settings.edit', $setting) }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('admin.teams.edit', $team) }}" class="btn btn-sm btn-primary">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <form onclick="return confirm('are you sure !')" action="{{ route('admin.settings.destroy', $setting) }}"
+                                    <form onclick="return confirm('are you sure !')" action="{{ route('admin.teams.destroy', $team) }}"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-sm btn-danger" setting="submit"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-danger" team="submit"><i class="fa fa-trash"></i></button>
                                     </form>
                                 </div>
                                 </td>

@@ -10,8 +10,8 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Semua Data</h3>
-                <a href="{{ route('admin.settings.create')}}" class="btn btn-success shadow-sm float-right"> <i class="fa fa-plus"></i> Tambah </a>
+                <h3 class="card-title">Data Testimonial</h3>
+                <a href="{{ route('admin.testimonials.create')}}" class="btn btn-success shadow-sm float-right"> <i class="fa fa-plus"></i> Tambah </a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -20,27 +20,35 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Key</th>
-                        <th>Value</th>
+                        <th>Nama</th>
+                        <th>Profile</th>
+                        <th>Pekerjaan</th>
+                        <th>Pesan</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @forelse($settings as $setting)
+                        @forelse($testimonials as $testimonial)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $setting->key }}</td>
-                                <td>{{ $setting->value }}</td>
+                                <td>{{ $testimonial->name }}</td>
+                                <td>
+                                  <a target="_blank" href="{{ Storage::url($testimonial->profile) }}">
+                                    <img width="80" src="{{ Storage::url($testimonial->profile) }}" alt="">
+                                  </a>
+                                </td>
+                                <td>{{ $testimonial->pekerjaan }}</td>
+                                <td>{{ $testimonial->pesan }}</td>
                                 <td>
                                 <div class="btn-group btn-group-sm">
-                                    <a href="{{ route('admin.settings.edit', $setting) }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('admin.testimonials.edit', $testimonial) }}" class="btn btn-sm btn-primary">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <form onclick="return confirm('are you sure !')" action="{{ route('admin.settings.destroy', $setting) }}"
+                                    <form onclick="return confirm('are you sure !')" action="{{ route('admin.testimonials.destroy', $testimonial) }}"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-sm btn-danger" setting="submit"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-danger" test$testimonial="submit"><i class="fa fa-trash"></i></button>
                                     </form>
                                 </div>
                                 </td>
